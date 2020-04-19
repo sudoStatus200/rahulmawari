@@ -13,16 +13,12 @@ module.exports = {
   menu: [
     {
       label: "Articles",
-      path: "/"
-    }
+      path: "/",
+    },
     // {
     //   label: 'About me',
     //   path: '/pages/about'
     // },
-    // {
-    //   label: 'Contact me',
-    //   path: '/pages/contacts'
-    // }
   ],
   author: {
     name: "Rahul Singh Mawari",
@@ -30,20 +26,20 @@ module.exports = {
     bio: "",
     contacts: {
       email: "",
-      facebook: "#",
-      telegram: "#",
-      twitter: "#",
-      github: "#",
+      facebook: "",
+      telegram: "",
+      twitter: "",
+      github: "sudoStatus200",
       rss: "",
       vkontakte: "",
-      linkedin: "#",
-      instagram: "#",
+      linkedin: "rahul-mawari-5a8456135/",
+      instagram: "",
       line: "",
       gitlab: "",
       weibo: "",
       codepen: "",
       youtube: "",
-      soundcloud: ""
-    }
-  }
+      soundcloud: "",
+    },
+  },
 };
