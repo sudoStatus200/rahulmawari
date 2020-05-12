@@ -1,14 +1,14 @@
 "use strict";
 
 module.exports = {
-  url: "https://rahulmawari.netlify.com/",
+  url: "https://rahulmawari.com/",
   pathPrefix: "/",
-  title: "Blog by Rahul Singh Mawari",
+  title: "Rahul Singh Mawari",
   subtitle: "",
   copyright: "© All rights reserved.",
   disqusShortname: "",
   postsPerPage: 4,
-  googleAnalyticsId: "",
+  googleAnalyticsId: "UA-164372926-1",
   useKatex: false,
   menu: [
     {
