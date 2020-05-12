@@ -1,21 +1,46 @@
 ---
-title: Perfecting the Art of Perfection
-date: "2016-09-01T23:46:37.121Z"
+title: Setup AWS DynamoDB in local with docker
+date: "2020-05-12T15:17:02.810Z"
 template: "post"
 draft: false
-slug: "perfecting-the-art-of-perfection"
-category: "Design Inspiration"
+slug: "aws-dynamodb-local-docker"
+category: "aws"
 tags:
-  - "Handwriting"
-  - "Learning to write"
-description: "Quisque cursus, metus vitae pharetra auctor, sem massa mattis sem, at interdum magna augue eget diam. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Morbi lacinia molestie dui. Praesent blandit dolor. Sed non quam. In vel mi sit amet augue congue elementum."
-socialImage: "/media/image-2.jpg"
+  - "AWS"
+  - "DynamoDB"
+description: "AWS dynamodb can be accessed directly from your system but for that developer needs access to AWS account and It might be possible that you can't or don't want to give access to every developer. DynamoDB charges for reading, writing and storing the data , so testing with AWS DynamoDB directly also could be very expensive. To resolve all these issue amazon provides amazon/dynamodb-local."
 ---
 
-Quisque cursus, metus vitae pharetra auctor, sem massa mattis sem, at interdum magna augue eget diam. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Morbi lacinia molestie dui. Praesent blandit dolor. Sed non quam. In vel mi sit amet augue congue elementum.
+AWS dynamodb can be accessed directly from your system but for that developer needs access to AWS account and It might be possible that you can't or don't want to give access to every developer. DynamoDB charges for reading, writing and storing the data , so testing with AWS DynamoDB directly also could be very expensive. To resolve all these issue amazon provides
+[amazon/dynamodb-local](https://hub.docker.com/r/amazon/dynamodb-local/).
 
-![Nulla faucibus vestibulum eros in tempus. Vestibulum tempor imperdiet velit nec dapibus](/media/image-2.jpg)
+![dynamodb](https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/DynamoDB.png/220px-DynamoDB.png)
 
-Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. 
+## Step 1 : Pull image and run docker image
 
-Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus.
+- Pull the docker image from this link [amazon/dynamodb-local](https://hub.docker.com/r/amazon/dynamodb-local/)
+- Run docker image: `docker run -p 8000:8000 amazon/dynamodb-local`
+
+But this is not enough, We should be running docker image inside the container
+
+## Step 2 : Setup and Run container
+
+By default port is 8000 but It can be changes while running image inside the container.
+
+Command to run inside container with port 9000:
+`docker run -d -p 9000:8000 --name dynamo-db-local amazon/dynamodb-local`
+
+Above command will start container dynamo-db-local and DynamoDB port 9000. Now you can access AWS DynamoDB local with endpoint http://localhost:9000/.
+
+## Step 3 : Access DynamoDB local from AWS Cli
+
+I hope you have already setup AWS configuration in your system to run AWS Cli.
+If you not setup yet checkout [this](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html)
+
+To run an AWS Cli command, you need to specify endpoint to dynamodb and region as well.
+For example to list tables:
+`aws dynamodb list-tables --endpoint-url http://localhost:9000/ --region example`
+
+Above command will give you list of tables in your local dynamodb(There will be nothing initially, you need to create tables :) ).
+
+Hope it helps you!!!! :)

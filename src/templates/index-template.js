@@ -11,7 +11,7 @@ import type { PageContext, AllMarkdownRemark } from "../types";
 
 type Props = {
   data: AllMarkdownRemark,
-  pageContext: PageContext
+  pageContext: PageContext,
 };
 
 const IndexTemplate = ({ data, pageContext }: Props) => {
@@ -22,7 +22,7 @@ const IndexTemplate = ({ data, pageContext }: Props) => {
     hasNextPage,
     hasPrevPage,
     prevPagePath,
-    nextPagePath
+    nextPagePath,
   } = pageContext;
 
   const { edges } = data.allMarkdownRemark;
@@ -33,7 +33,7 @@ const IndexTemplate = ({ data, pageContext }: Props) => {
     <Layout title={pageTitle} description={siteSubtitle}>
       <Sidebar isIndex />
       <Page>
-        {/* <Feed edges={edges} /> */}
+        <Feed edges={edges} />
         <Pagination
           prevPagePath={prevPagePath}
           nextPagePath={nextPagePath}
